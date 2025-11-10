@@ -1,0 +1,51 @@
+@startuml clinicavida+
+' Diagrama de Casos de Uso - Clínica Vida+
+' Solução para o Passo 5
+
+left to right direction
+
+' Definir os Atores
+actor Secretária
+actor Médico
+
+' Agrupar os Casos de Uso no Sistema
+rectangle "Sistema Clínica Vida+" {
+    
+    ' Casos de Uso da Secretária
+    usecase "Cadastrar Paciente" as UC1
+    usecase "Agendar Consulta" as UC2
+    usecase "Confirmar Consulta" as UC3
+    
+    ' Caso de Uso de ambos
+    usecase "Cancelar Consulta" as UC4
+    
+    ' Casos de Uso do Médico
+    usecase "Gerar Receita" as UC5
+    
+    ' Funcionalidade incluída
+    usecase "Impressão da Receita" as UC6
+}
+
+' Relacionamentos Atores -> Casos de Uso
+Secretária -- UC1
+Secretária -- UC2
+Secretária -- UC3
+Secretária -- UC4
+
+Médico -- UC4
+Médico -- UC5
+
+' Relacionamentos entre Casos de Uso
+
+' "Para agendar ou confirmar a consulta, o paciente deve estar cadastrado." [cite: 134]
+' Usamos <<include>> para mostrar que o fluxo de UC1 (ou sua verificação)
+' é obrigatório para executar UC2 e UC3.
+UC2 ..> UC1 : <<include>>
+UC3 ..> UC1 : <<include>>
+
+' "sempre que uma receita for gerada, o sistema incluirá
+' automaticamente a funcionalidade de impressão da receita." [cite: 135]
+' Isso é um <<include>> clássico.
+UC5 ..> UC6 : <<include>>
+
+@enduml

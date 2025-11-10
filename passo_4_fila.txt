@@ -1,0 +1,42 @@
+ALGORITMO FilaDeAtendimento
+(Solução para o Passo 4)
+
+VARIAVEIS
+    FilaPacientes: FILA DE {nome: TEXTO, cpf: TEXTO}
+    paciente_atendido: {nome: TEXTO, cpf: TEXTO}
+
+INICIO
+    // 1. Permita inserir 3 pacientes na fila (nome e CPF)
+    ESCREVER "Cadastrando 3 pacientes na fila..."
+    
+    ENFILEIRAR(FilaPacientes, {nome: "João Silva", cpf: "111.222.333-01"})
+    ENFILEIRAR(FilaPacientes, {nome: "Maria Souza", cpf: "444.555.666-02"})
+    ENFILEIRAR(FilaPacientes, {nome: "Carlos Lima", cpf: "777.888.999-03"})
+    
+    ESCREVER "Fila atual: João (primeiro) -> Maria -> Carlos (último)"
+    
+    // 2. Remova o primeiro paciente da fila para atendimento
+    SE (FilaPacientes NAO ESTA VAZIA) ENTÃO
+        paciente_atendido <- DESENFILEIRAR(FilaPacientes)
+        ESCREVER "----------------------------------------"
+        ESCREVER "Chamando para atendimento: " + paciente_atendido.nome
+        ESCREVER "----------------------------------------"
+    SENÃO
+        ESCREVER "A fila está vazia."
+    FIM_SE
+    
+    // 3. Mostre quem ainda está na fila após o primeiro atendimento
+    ESCREVER "Pacientes restantes na fila:"
+    
+    SE (FilaPacientes ESTA VAZIA) ENTÃO
+        ESCREVER "Nenhum paciente na fila."
+    SENÃO
+        // Itera sobre a fila para mostrar os restantes
+        // (A forma de "olhar" a fila sem esvaziá-la depende da linguagem,
+        // mas em pseudocódigo podemos simplesmente iterar)
+        PARA CADA paciente EM FilaPacientes FAZER
+            ESCREVER " - Nome: " + paciente.nome + " (CPF: " + paciente.cpf + ")"
+        FIM_PARA
+    FIM_SE
+
+FIM_ALGORITMO
